@@ -15,3 +15,6 @@ GET http://localhost:8080/api/orders/1
 # public List<Order> getOrders(User user) {
 #     return user.getOrders(); // triggers lazy loading
 # }
+
+### This will work correctly even with Lazy loading
+GET http://localhost:8080/api/user-with-orders/john@example.com

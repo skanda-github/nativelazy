@@ -2,6 +2,8 @@ package com.example.nativelazy.controller;
 
 import com.example.nativelazy.entity.*;
 import com.example.nativelazy.repository.*;
+import com.example.nativelazy.service.UserService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -12,10 +14,12 @@ public class DemoController {
 
     private final UserRepository userRepo;
     private final OrderRepository orderRepo;
+    private UserService userService;
 
-    public DemoController(UserRepository userRepo, OrderRepository orderRepo) {
+    public DemoController(UserRepository userRepo, OrderRepository orderRepo, UserService userService) {
         this.userRepo = userRepo;
         this.orderRepo = orderRepo;
+        this.userService = userService;
     }
 
     @GetMapping("/user/{email}")
@@ -26,6 +30,11 @@ public class DemoController {
     @GetMapping("/orders/{userId}")
     public List<Order> getOrdersForUser(@PathVariable Long userId) {
         return orderRepo.findOrdersByUserId(userId);
+    }
+
+    @GetMapping("/user-with-orders/{email}")
+    public User getUserWithOrders(@PathVariable String email) {
+        return userService.getUserWithOrdersByEmail(email);
     }
 
     // Seed sample data
