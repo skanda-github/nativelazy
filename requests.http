@@ -1,0 +1,17 @@
+### 1. Seed sample data
+POST http://localhost:8080/api/init
+Content-Type: application/json
+
+### 2. Native SQL Query: Find user by email
+GET http://localhost:8080/api/user/john@example.com
+
+### 3. Native SQL Query: Get orders for userId = 1
+GET http://localhost:8080/api/orders/1
+
+### 4. Lazy loading test — You need to call this from a service inside a transaction to work properly
+# This is a placeholder comment: Lazy loading (user.getOrders()) works inside a @Transactional service method only.
+# Example:
+# @Transactional
+# public List<Order> getOrders(User user) {
+#     return user.getOrders(); // triggers lazy loading
+# }
